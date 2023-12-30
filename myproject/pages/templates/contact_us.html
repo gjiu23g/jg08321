@@ -1,4 +1,26 @@
-<html>
-<head><title>Contact Us</title></head>
-<body><h1>Contact Us Page</h1></body>
-</html>
+<!-- pages/templates/contact_us.html -->
+
+<h1>Contact {{ company_name }}</h1>
+
+<p>
+  Phone: {{ company_phone }}<br>
+  Email: {{ company_email }}
+</p>
+
+<p>
+  {{ company_address }}
+</p>
+
+<form method="POST">
+  {% csrf_token %}
+  <label>Name:</label>
+  <input type="text" name="name"><br>
+
+  <label>Email:</label>
+  <input type="email" name="email"><br>  
+
+  <label>Message:</label><br>
+  <textarea name="message"></textarea><br>
+
+  <input type="submit" value="Submit">
+</form>

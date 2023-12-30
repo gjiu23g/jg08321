@@ -1,4 +1,25 @@
-<html>
-<head><title>About Us</title></head>
-<body><h1>About Us Page</h1></body>
-</html>
+<!-- pages/templates/about_us.html -->
+
+<h1>{{ company_name }}</h1>
+
+<h2>Our History</h2>
+<p>{{ company_history }}</p>
+
+<h2>Our Mission</h2>
+<p>{{ company_mission }}</p>
+
+<h2>Our Values</h2>
+<ul>
+{% for value in company_values %}
+  <li>{{ value }}</li>  
+{% endfor %}
+</ul>
+
+<h2>Leadership Team</h2>
+<ul>
+{% for member in company_team %}
+  <li>{{ member.name }} - {{ member.title }}</li>
+{% endfor %}  
+</ul>
+
+<p>Company Address: {{ company_location }}</p>

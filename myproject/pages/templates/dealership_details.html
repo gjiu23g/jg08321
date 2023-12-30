@@ -1,0 +1,14 @@
+<!-- pages/templates/dealership_details.html -->
+<html>
+<head><title>Dealership Details</title></head>
+<body>
+  <h1>Dealership Reviews</h1>
+  <!-- Display dealership details here -->
+  <h2>Reviews</h2>
+  <ul>
+    {% for review in reviews %}
+      <li>{{ review.review }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

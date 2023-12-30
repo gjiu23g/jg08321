@@ -1,0 +1,12 @@
+<!-- pages/templates/dealership_list.html -->
+<html>
+<head><title>Dealerships</title></head>
+<body>
+  <h1>Dealerships</h1>
+  <ul>
+    {% for dealership in dealerships %}
+      <li><a href="{% url 'dealership-details' dealership.id %}">{{ dealership.name }}</a></li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
