@@ -1,8 +1,14 @@
 # myproject/api/views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Review
-from .serializers import ReviewSerializer
+from .models import Dealership, Review
+from api.serializers import DealershipSerializer, ReviewSerializer
+
+class DealershipsView(APIView):
+    def get(self, request):
+        dealership = Dealership.objects.all()
+        serializer = DealershipSerializer(dealership, many=True)
+        return Response(serializer.data)
 
 class ReviewsView(APIView):
     def get(self, request):
