@@ -1,5 +1,5 @@
 # myproject/pages/views.py
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 import requests
 
@@ -58,3 +58,27 @@ def dealership_details(request, dealer_id):
   }
 
   return render(request, 'dealership_details.html', context)
+
+def home(request):
+  return render(request, 'home.html') 
+
+
+from .forms import SignUpForm
+
+
+def login(request):
+  # Login view code
+  return render(request, 'login.html') 
+
+
+
+def signup(request):
+  if request.method == 'POST':
+    form = SignUpForm(request.POST)
+    if form.is_valid():
+      # Create user here
+      return redirect('login')
+  else:
+    form = SignUpForm()
+  
+  return render(request, 'signup.html', {'form': form})
