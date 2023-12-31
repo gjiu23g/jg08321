@@ -3,10 +3,13 @@
 <body>
 
   <h1>Dealerships</h1>
-  
-  {% comment %}
-  Loop through dealerships and display data here
-  {% endcomment %}
-  
+
+  {% for dealership in dealerships %}
+    <div>
+      <h2>{{ dealership.name }}</h2>
+      <p>{{ dealership.location }}</p>  
+    </div>
+  {% endfor %}
+
 </body>
 </html>
