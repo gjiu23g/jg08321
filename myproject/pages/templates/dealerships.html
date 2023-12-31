@@ -6,23 +6,52 @@
 <body style="background-color: #FF00FF; font-family: Arial, Helvetica, sans-serif; color: #333333;">
 
   <h1 style="font-size: 30px; font-weight: bold; text-align: center;">Dealerships</h1>
+
+  <div style="text-align: center;">
+    <label for="idFilter">Filter by ID:</label>
+    <select id="idFilter" style="margin-bottom: 20px;">
+      <option value="">Select ID...</option>
+      <!-- Options will be populated by JavaScript -->
+    </select>
+  </div>
   
   <table style="width: 80%; margin: 20px auto; border: 2px solid #CCCCCC;">
     <tr style="background-color: #999999;">
+      <th style="padding: 5px; font-weight: bold;">ID</th>
       <th style="padding: 5px; font-weight: bold;">Name</th>
       <th style="padding: 5px; font-weight: bold;">Location</th>
     </tr>
+    <!-- Table rows will be added by JavaScript -->
+  </table>
 
-    <!-- Use JavaScript to loop through dealerships and add rows -->
+  <script>
+    fetch('/api/dealerships')
+      .then(response => response.json())
+      .then(data => {
+        const dealerships = data.dealerships;
+        
+        // Populate the dropdown with dealership IDs
+        const selectElement = document.getElementById('idFilter');
+        dealerships.forEach(dealership => {
+          const option = document.createElement('option');
+          option.value = dealership.id;
+          option.textContent = dealership.id;
+          selectElement.appendChild(option);
+        });
 
-    <script>
-      fetch('/api/dealerships')
-        .then(response => response.json())
-        .then(data => {
-          const dealerships = data.dealerships;
-          
-          dealerships.forEach(dealership => {
+        // Create and display table rows
+        const createAndDisplayRows = (filteredDealerships) => {
+          // Clear existing rows
+          document.querySelectorAll('table tr:not(:first-child)').forEach(row => row.remove());
+
+          // Add new rows
+          filteredDealerships.forEach(dealership => {
             const row = document.createElement('tr');
+
+            const idCell = document.createElement('td');
+            idCell.textContent = dealership.id;
+            idCell.style.padding = '5px';
+            row.appendChild(idCell);
 
             const nameCell = document.createElement('td');
             nameCell.textContent = dealership.name;
@@ -36,10 +65,21 @@
 
             document.querySelector('table').appendChild(row);
           });
-        });
-    </script>
+        };
 
-  </table>
+        // Initially display all dealerships
+        createAndDisplayRows(dealerships);
+
+        // Filter display when dropdown selection changes
+        selectElement.addEventListener('change', (event) => {
+          const selectedId = event.target.value;
+          const filteredDealerships = selectedId
+            ? dealerships.filter(dealership => dealership.id.toString() === selectedId)
+            : dealerships; // Display all if no ID selected
+          createAndDisplayRows(filteredDealerships);
+        });
+      });
+  </script>
 
 </body>
 </html>
