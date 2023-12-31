@@ -6,9 +6,6 @@ import requests
 def contact_us(request):
   return render(request, 'contact_us.html')
 
-def about_us(request):
-  return render(request, 'about_us.html')
-
 def hello(request):
   return HttpResponse("Hello!")
 
@@ -71,6 +68,12 @@ def login(request):
   return render(request, 'login.html') 
 
 
+from django.contrib.auth import logout
+
+def logout_view(request):
+  logout(request)
+  return redirect('home')
+
 
 def signup(request):
   if request.method == 'POST':
@@ -82,3 +85,18 @@ def signup(request):
     form = SignUpForm()
   
   return render(request, 'signup.html', {'form': form})
+
+from django.contrib.auth.models import User
+
+def navbar_view(request):
+
+  # Create a sample User object
+  user = User.objects.create(username='john', password='secret')  
+
+  # Set request.user to simulate logged in user
+  request.user = User.objects.create(username='john')
+
+  return render(request, 'navbar.html')
+
+def submit_review(request):
+  return render(request, 'submitreview.html')

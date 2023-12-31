@@ -4,17 +4,9 @@
     <li><a href="/">Home</a></li>
     <li><a href="/about">About</a></li>
     <li><a href="/contact">Contact</a></li>
-    {% if request.user.is_authenticated %}
-      <li>Logged in as: <strong>{{ request.user.username }}</strong></li>
-    {% else %}
-      <li>
-        <form method="post" action="/login/">
-          {% csrf_token %}
-          <input type="text" name="username" placeholder="Username">
-          <input type="password" name="password" placeholder="Password">
-          <button type="submit">Login</button>
-        </form>
-      </li>
-    {% endif %}
   </ul>
 </nav>
+
+<p>John is logged in</p>
+
+<a href="/logout/">Logout</a>

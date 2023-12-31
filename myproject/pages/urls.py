@@ -13,4 +13,5 @@ urlpatterns = [
     path('details/<int:dealer_id>/', views.dealership_details, name='dealership_details'), 
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
+    path('submitreview/', views.submit_review, name='submit-review')
 ]
