@@ -7,6 +7,22 @@
   </ul>
 </nav>
 
-<p>John is logged in</p>
-
-<a href="/logout/">Logout</a>
+{% if request.user.is_authenticated %}
+  <p>Logged in as {{ request.user.username }}</p>
+  <a href="/logout/">Logout</a>
+{% else %}
+    <p>You are not logged in</p>
+    <form method="post" action="/login/">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username">
+      <input type="password" name="password" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
+    <p>ADMIN LOGIN</p>
+    <form method="post" action="/login/">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username">
+      <input type="password" name="password" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
+{% endif %}
