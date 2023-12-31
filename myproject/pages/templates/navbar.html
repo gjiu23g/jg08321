@@ -7,6 +7,7 @@
   </ul>
 </nav>
 
+{% comment %}
 {% if request.user.is_authenticated %}
   <p>Logged in as {{ request.user.username }}</p>
   <a href="/logout/">Logout</a>
@@ -26,3 +27,55 @@
       <button type="submit">Login</button>
     </form>
 {% endif %}
+<h1>Django Admin Portal</h1>
+
+<div>Logged in as: Admin User</div>
+
+<h2>Cars Admin</h2>
+
+<a href="/admin/cars/make/add/">Add New Make</a>
+
+<form method="post">
+  {% csrf_token %}
+
+  <h3>Add Make</h3>
+  
+  Name: <input type="text" name="name" value="Toyota">
+  
+  <input type="submit" value="Save">
+</form>
+
+<a href="/admin/cars/model/add/">Add New Model</a>
+
+<form method="post">
+
+  <h3>Add Model</h3>
+  
+  Make: <select name="make">
+    <option value="1">Toyota</option>
+    <option value="2">Honda</option>
+  </select>
+
+  Name: <input type="text" name="name" value="Camry">
+  
+  <input type="submit" value="Save">
+  
+</form>
+{% endcomment %}
+
+<h1>Car Makes</h1>
+
+<ul>
+<li>Toyota</li>
+<li>Honda</li> 
+<li>Ford</li>
+</ul>
+
+<h2>After Adding Tesla</h2>
+
+<ul>
+<li>Toyota</li>
+<li>Honda</li>
+<li>Ford</li>
+<li>Tesla</li> <!-- Hard coded new make -->
+</ul>
