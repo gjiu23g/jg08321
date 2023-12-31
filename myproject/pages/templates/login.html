@@ -1,0 +1,15 @@
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li>
+      <form method="post" action="/login/">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <button type="submit">Log In</button>
+      </form>
+    </li>
+  </ul>  
+</nav>
