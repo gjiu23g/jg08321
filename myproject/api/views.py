@@ -29,10 +29,33 @@ class DealershipsView(APIView):
         return Response({"dealerships": dealerships})
 
 class ReviewsView(APIView):
+
     def get(self, request):
-        dealer_id = request.query_params.get('dealerId', None)
-        if dealer_id is not None:
-            reviews = Review.objects.filter(dealership__id=dealer_id)
-            serializer = ReviewSerializer(reviews, many=True)
-            return Response(serializer.data)
-        return Response({'reviews': []})
+        reviews = [
+            {
+                "id": 1,
+                "dealershipId": 1,
+                "rating": 5,
+                "comment": "Great dealership!"
+            },
+            {
+                "id": 2,
+                "dealershipId": 1,
+                "rating": 2, 
+                "comment": "Not very helpful staff."
+            },
+            {
+                "id": 3,
+                "dealershipId": 2,
+                "rating": 4,
+                "comment": "Good selection of cars."
+            },
+            {
+                "id": 4,
+                "dealershipId": 2, 
+                "rating": 3,
+                "comment": "OK prices."
+            }
+        ]
+        
+        return Response({"reviews": reviews})
