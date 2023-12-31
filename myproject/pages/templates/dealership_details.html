@@ -7,7 +7,10 @@
   <h2>Reviews</h2>
   <ul>
     {% for review in reviews %}
-      <li>{{ review.review }}</li>
+    <div>
+      <p>{{ review.text }}</p>
+      <p>By {{ review.author }}</p>
+    </div>
     {% endfor %}
   </ul>
 </body>

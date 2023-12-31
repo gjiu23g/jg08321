@@ -39,11 +39,21 @@ def dealerships(request):
   return render(request, 'dealerships.html', context)
 
 def dealership_details(request, dealer_id):
-  response = requests.get(f"http://localhost:8000/api/reviews/?dealerId={dealer_id}")
+
+  response = requests.get("http://localhost:8000/api/reviews/")
+  data = response.json()
+
   reviews = response.json()['reviews']
+  print(reviews) 
+
+  reviews = [
+    {'text': 'Great dealership, friendly staff', 'author': 'Jane'},
+    {'text': 'Terrible customer service, would not recommend', 'author': 'John'},
+    {'text': 'Great selection of cars and fair prices', 'author': 'Bob'},
+    {'text': 'Staff were not helpful and lacked product knowledge', 'author': 'Mary'}
+  ]
 
   context = {
-    'dealer_id': dealer_id,
     'reviews': reviews
   }
 
